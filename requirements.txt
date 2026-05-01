@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+
+## Following are handled in base
+# numpy
+# scipy
+# scikit-learn
+# pandas
+
+## later
+# shap
+python-multipart

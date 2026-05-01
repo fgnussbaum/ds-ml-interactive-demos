@@ -1,0 +1,220 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, sans-serif;
+  display: flex;
+  height: 100vh;
+  background: #f4f4f4;
+  color: #222;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+
+#sidebar {
+  width: 180px;
+  background: #2c2c2c;
+  color: #ddd;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  padding: 1rem 0;
+}
+
+.sidebar-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #888;
+  padding: 0 1rem 0.75rem;
+  border-bottom: 1px solid #3a3a3a;
+  margin-bottom: 0.5rem;
+}
+
+#sidebar ul { list-style: none; }
+
+#sidebar a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  border-left: 3px solid transparent;
+}
+
+#sidebar a:hover { background: #383838; color: #fff; }
+#sidebar a.active { border-left-color: #4a9eff; color: #fff; background: #333; }
+
+/* ── Content area ────────────────────────────────────────────────────────── */
+
+#content {
+  flex: 1;
+  overflow: auto;
+  padding: 2rem;
+}
+
+.demo-section { display: none; }
+.demo-section.active { display: block; }
+
+h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.4rem; }
+
+.instructions { font-size: 0.85rem; color: #666; margin-bottom: 1rem; }
+
+/* ── Canvas ──────────────────────────────────────────────────────────────── */
+
+canvas {
+  display: block;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: crosshair;
+  max-width: 100%;
+}
+
+/* ── Controls ────────────────────────────────────────────────────────────── */
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.controls label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ls-label { color: #c00; font-weight: 500; }
+.rr-label { color: #9a7000; font-weight: 500; }
+
+button {
+  padding: 0.3rem 0.9rem;
+  font-size: 0.85rem;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+button:hover { background: #f0f0f0; }
+
+/* ── Overfitting demo ────────────────────────────────────────────────────── */
+
+.of-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.of-controls label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+.of-controls select {
+  padding: 0.2rem 0.4rem;
+  font-size: 0.9rem;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+
+button.of-active {
+  background: #4a9eff;
+  color: #fff;
+  border-color: #3a8eef;
+}
+
+button.of-active:hover { background: #3a8eef; }
+
+.of-main-rmse {
+  font-size: 0.85rem;
+  color: #555;
+  margin: 0.3rem 0 0.1rem;
+  min-height: 1.2em;
+}
+
+.of-nudge {
+  margin: 0.9rem 0;
+  padding: 0.7rem 1rem;
+  background: #fffbe6;
+  border-left: 4px solid #f0c040;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.of-nudge-hint {
+  display: block;
+  font-size: 0.82rem;
+  color: #888;
+  margin-top: 0.15rem;
+}
+
+.of-panel-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.9rem;
+  margin: 0.8rem 0;
+}
+
+.of-panel {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.5rem 0.5rem 0.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.of-panel-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #444;
+  text-align: center;
+  margin-bottom: 0.2rem;
+}
+
+.of-panel-rmse {
+  font-size: 0.78rem;
+  color: #555;
+  text-align: center;
+  padding: 0.2rem 0 0.1rem;
+  min-height: 1.3em;
+}
+
+.of-placeholder {
+  position: absolute;
+  inset: 0;
+  background: rgba(248, 248, 248, 0.93);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.6;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.of-rmse-section {
+  margin-top: 0.5rem;
+}
+
+.of-rmse-section-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 0.2rem;
+}
