@@ -15,7 +15,7 @@
   // ── State ─────────────────────────────────────────────────────────────────
   const state = {
     scenario: 'cubic',
-    nTrain: 25,
+    splitPct: 80,
     degree: 3,
     showTest: false,
     data: null,
@@ -47,8 +47,8 @@
 
   let nDebounce = null;
   nSlider.addEventListener('input', () => {
-    state.nTrain = +nSlider.value;
-    nVal.textContent = state.nTrain;
+    state.splitPct = +nSlider.value;
+    nVal.textContent = state.splitPct;
     clearTimeout(nDebounce);
     nDebounce = setTimeout(fetchAndRender, 150);
   });
@@ -73,7 +73,7 @@
   // ── UI sync ───────────────────────────────────────────────────────────────
   function syncToggleUI() {
     testToggle.textContent = state.showTest ? 'Hide test data' : 'Show test data';
-    testToggle.classList.toggle('of-active', state.showTest);
+    testToggle.classList.toggle('active', state.showTest);
     nudge.style.display = state.showTest ? 'none' : '';
     placeholder.style.display = state.showTest ? 'none' : '';
     bestTitle.textContent = state.showTest && state.data
@@ -86,7 +86,7 @@
     const res = await fetch('/api/overfitting/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ scenario: state.scenario, n_train: state.nTrain }),
+      body: JSON.stringify({ scenario: state.scenario, train_pct: state.splitPct / 100 }),
     });
     state.data = await res.json();
     syncToggleUI();
@@ -199,7 +199,7 @@
       height: 240,
       showlegend: true,
       legend: { orientation: 'h', y: -0.24, x: 0 },
-      xaxis: { title: 'Polynomial degree', tickvals: [1,2,3,4,5,6,7,8,9] },
+      xaxis: { title: 'Polynomial degree', tickvals: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] },
       yaxis: { title: 'RMSE', rangemode: 'tozero' },
       paper_bgcolor: '#fff',
       plot_bgcolor: '#fff',
@@ -227,7 +227,7 @@
   const PANELS = [
     { divId: 'of-panel-underfit', rmseId: 'of-panel-underfit-rmse', readyKey: 'underfit', deg: () => 1 },
     { divId: 'of-panel-best',     rmseId: 'of-panel-best-rmse',     readyKey: 'best',     deg: () => state.data.best_degree },
-    { divId: 'of-panel-overfit',  rmseId: 'of-panel-overfit-rmse',  readyKey: 'overfit',  deg: () => 9 },
+    { divId: 'of-panel-overfit',  rmseId: 'of-panel-overfit-rmse',  readyKey: 'overfit',  deg: () => state.data.fits[state.data.fits.length - 1].degree },
   ];
 
   function panelLayout() {

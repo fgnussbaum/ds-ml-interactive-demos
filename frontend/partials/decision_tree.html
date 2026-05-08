@@ -1,0 +1,98 @@
+<section id="demo-decision_tree" class="demo-section">
+  <h2>Decision Tree Explorer</h2>
+  <aside class="callout-label">
+    Here we checkout decision trees for the <i>Palmer Penguins</i> dataset (3 penguin species, 4 features, 333 samples).
+  </aside>
+
+
+  <!-- Panel 1: The Data -->
+  <div class="panel">
+    <div class="panel-head">
+      <span class="panel-title">1 &middot; The Data</span>
+      <div class="dt-controls">
+        <label>X axis:
+          <select id="dt-feat-x">
+            <option value="bill_depth_mm" selected>Bill depth (mm)</option>
+            <option value="bill_length_mm">Bill length (mm)</option>
+            <option value="flipper_length_mm">Flipper length (mm)</option>
+            <option value="body_mass_g">Body mass (g)</option>
+          </select>
+        </label>
+        <label>Y axis:
+          <select id="dt-feat-y">
+            <option value="bill_depth_mm">Bill depth (mm)</option>
+            <option value="bill_length_mm">Bill length (mm)</option>
+            <option value="flipper_length_mm" selected>Flipper length (mm)</option>
+            <option value="body_mass_g">Body mass (g)</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div id="dt-scatter" class="plot-constrained"></div>
+  </div>
+
+  <!-- Panel 2: Grow Your Tree -->
+  <div class="panel">
+    <div class="panel-head">
+      <span class="panel-title">2 &middot; Grow Your Tree</span>
+      <div class="dt-controls">
+        <label>Max depth: <span id="dt-depth-val">3</span>
+          <input type="range" id="dt-depth" min="1" max="6" value="3">
+        </label>
+        <label>Min samples/leaf: <span id="dt-msl-val">5</span>
+          <input type="range" id="dt-msl" min="1" max="20" value="5">
+        </label>
+      </div>
+    </div>
+    <div id="dt-loading" class="dt-loading" style="display:none">Computing&hellip;</div>
+    <div class="two-col" id="dt-panel2">
+      <div class="dt-left-col">
+        <div class="dt-tree-wrap">
+          <img id="dt-tree-img" src="" alt="Decision tree">
+        </div>
+        <div id="dt-root-caption" class="dt-caption"></div>
+        <div class="dt-imp-title">Feature importance</div>
+        <div id="dt-importance-chart"></div>
+      </div>
+      <div class="dt-right-col">
+        <div class="dt-boundary-wrap">
+          <img id="dt-boundary-img" src="" alt="Decision boundaries">
+        </div>
+        <label class="dt-anim-label">Show depth: <span id="dt-anim-val">3</span>
+          <input type="range" id="dt-anim" min="1" max="3" value="3">
+        </label>
+        <div id="dt-acc-text" class="dt-acc"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel 3: Depth vs Accuracy -->
+  <div class="panel">
+    <div class="panel-title">3 &middot; Depth vs. Accuracy</div>
+    <div id="dt-acc-chart"></div>
+  </div>
+
+  <!-- Panel 4: Random Forest -->
+  <div class="panel">
+    <div class="panel-head">
+      <span class="panel-title">4 &middot; Random Forest</span>
+      <button id="dt-rf-btn">Compare with Random Forest (100 trees)</button>
+    </div>
+    <div id="dt-rf-content" style="display:none">
+      <div class="dt-compare-row">
+        <div class="dt-compare-col">
+          <div class="dt-compare-title">Decision Tree (depth <span id="dt-rf-depth-label">3</span>)</div>
+          <img id="dt-rf-dt-img" src="" alt="DT boundary">
+          <div id="dt-rf-dt-acc" class="dt-acc"></div>
+        </div>
+        <div class="dt-compare-col">
+          <div class="dt-compare-title">Random Forest (100 trees)</div>
+          <div id="dt-rf-loading" class="dt-loading" style="display:none">Computing&hellip;</div>
+          <img id="dt-rf-img" src="" alt="RF boundary" style="display:none">
+          <div id="dt-rf-acc" class="dt-acc"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

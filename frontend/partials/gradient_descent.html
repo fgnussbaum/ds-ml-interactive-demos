@@ -1,0 +1,74 @@
+<section id="demo-gradient_descent" class="demo-section">
+  <h2>Gradient Descent</h2>
+  <aside class="callout-label">
+    How does a regression line find its slope? Gradient descent starts from a wrong guess
+    and follows the loss surface downhill — one step at a time. Drag the slider to explore
+    manually, then run the animation.
+  </aside>
+
+  <!-- ── Top row: loss curve + scatter ──────────────────────────────────── -->
+  <div class="panel">
+    <div class="two-col">
+      <div>
+        <div class="panel-title">Loss (MSE) vs slope θ</div>
+        <div id="gd-loss"></div>
+      </div>
+      <div>
+        <div class="panel-title">Data + regression line</div>
+        <div id="gd-scatter"></div>
+      </div>
+    </div>
+
+    <!-- θ slider -->
+    <div class="gd-slider-row">
+      <label for="gd-theta-slider" class="gd-slider-label">θ</label>
+      <input type="range" id="gd-theta-slider" min="0" max="1" step="0.01">
+      <span class="gd-stat">MSE&thinsp;=&thinsp;<strong id="gd-mse-val">—</strong></span>
+      <span class="gd-stat">∇L&thinsp;=&thinsp;<strong id="gd-grad-val">—</strong></span>
+    </div>
+  </div>
+
+  <!-- ── GD controls ─────────────────────────────────────────────────────── -->
+  <div class="panel gd-controls-section">
+    <div class="gd-controls-row">
+      <span class="gd-ctrl-label">Learning rate α:</span>
+      <label class="gd-radio-label">
+        <input type="radio" name="gd-lr" value="small"> Cautious&thinsp;(α&thinsp;=&thinsp;0.05)
+      </label>
+      <label class="gd-radio-label">
+        <input type="radio" name="gd-lr" value="good" checked> Balanced&thinsp;(α&thinsp;=&thinsp;0.30)
+      </label>
+      <label class="gd-radio-label">
+        <input type="radio" name="gd-lr" value="large"> Aggressive&thinsp;(α&thinsp;=&thinsp;1.00)
+      </label>
+    </div>
+    <div class="gd-btn-row">
+      <button id="gd-run-btn">&#9654; Run GD</button>
+      <button id="gd-step-btn">Step</button>
+      <button id="gd-reset-btn">&#8635; Reset</button>
+      <span class="gd-stat">Step&thinsp;<strong id="gd-step-val">—</strong></span>
+    </div>
+  </div>
+
+  <!-- ── OLS callout ─────────────────────────────────────────────────────── -->
+  <aside class="callout-label">
+    <strong>What you are minimizing:</strong>
+    L(θ) = <sup>1</sup>/<sub>n</sub>&thinsp;Σ&thinsp;(θ·x<sub>i</sub> + b &minus; y<sub>i</sub>)<sup>2</sup>
+    — a parabola in θ (the curve on the left).
+    Setting dL/dθ = 0 and solving gives the exact minimum in one step:
+    <strong>θ* = Σ x<sub>i</sub>y<sub>i</sub> / Σ x<sub>i</sub><sup>2</sup></strong> (green ★).
+    <br>
+    Gradient descent finds the same point iteratively. While this is slower here, it generalises to
+    any differentiable loss with no closed form (neural networks, robust regression, …).
+  </aside>
+
+  <!-- ── 2D loss surface ─────────────────────────────────────────────────── -->
+  <div class="panel">
+    <div class="panel-title">2D loss surface (intercept × slope)</div>
+    <div id="gd-contour"></div>
+    <p class="gd-caption">
+      Elliptical contours show how MSE varies with both parameters simultaneously.
+      The GD path (blue) traces the descent; the green ★ marks the OLS minimum.
+    </p>
+  </div>
+</section>

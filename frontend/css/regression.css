@@ -1,0 +1,19 @@
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.controls label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ls-label { color: #00662c; font-weight: 500; }
+.rr-label { color: #49080e; font-weight: 500; }

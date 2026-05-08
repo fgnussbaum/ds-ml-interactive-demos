@@ -1,0 +1,236 @@
+<section id="demo-classification" class="demo-section">
+  <h2>Classification &amp; Thresholding</h2>
+
+  <!-- Controls row -->
+  <div class="cl-controls">
+    <label>Dataset:
+      <select id="cl-dataset">
+        <option value="unseparated" selected>Unseparated</option>
+        <option value="separated">Separated</option>
+        <option value="imbalanced">Imbalanced</option>
+      </select>
+    </label>
+  </div>
+
+  <!-- Row 1: Dot plot canvas -->
+  <div class="cl-dotplot-wrap">
+    <canvas id="cl-canvas"></canvas>
+  </div>
+
+  <!-- Row 2: Confusion matrix (left) + Metrics chart (right) -->
+  <div class="cl-row2">
+
+    <!-- Confusion matrix -->
+    <div class="cl-matrix-wrap">
+      <div class="cl-section-title">Confusion Matrix</div>
+      <table class="cl-matrix">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="cl-th-pred">Predicted ○</th>
+            <th class="cl-th-pred">Predicted ■</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="cl-th-actual">Actual ○</th>
+            <td id="cl-tn" class="cl-cell cl-cell-tn" data-metric="TN" data-tooltip="True Negative: circle correctly classified as circle">
+              <span class="cl-cell-label">TN</span>
+              <span class="cl-cell-count count">—</span>
+              <span class="cl-cell-icon">○</span>
+            </td>
+            <td id="cl-fp" class="cl-cell cl-cell-fp" data-metric="FP" data-tooltip="False Positive: circle wrongly classified as square">
+              <span class="cl-cell-label">FP</span>
+              <span class="cl-cell-count count">—</span>
+              <span class="cl-cell-icon cl-icon-miss">○✕</span>
+            </td>
+          </tr>
+          <tr>
+            <th class="cl-th-actual">Actual ■</th>
+            <td id="cl-fn" class="cl-cell cl-cell-fn" data-metric="FN" data-tooltip="False Negative: square wrongly classified as circle">
+              <span class="cl-cell-label">FN</span>
+              <span class="cl-cell-count count">—</span>
+              <span class="cl-cell-icon cl-icon-miss">■✕</span>
+            </td>
+            <td id="cl-tp" class="cl-cell cl-cell-tp" data-metric="TP" data-tooltip="True Positive: square correctly classified as square">
+              <span class="cl-cell-label">TP</span>
+              <span class="cl-cell-count count">—</span>
+              <span class="cl-cell-icon">■</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Metrics chart -->
+    <div class="cl-metrics-wrap">
+      <div class="cl-section-title">Metrics vs. Threshold</div>
+      <div id="cl-metrics-chart"></div>
+    </div>
+
+  </div><!-- end cl-row2 -->
+
+  <!-- Row 3: Formulas -->
+  <div class="cl-formulas">
+    <div class="cl-section-title">Metrics</div>
+    <div class="cl-formula-row">
+
+      <div class="cl-formula-card">
+        <div class="cl-formula-title">Accuracy</div>
+        <div class="cl-formula-expr">
+          <span class="cl-frac">
+            <span class="cl-num">
+              <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
+              +
+              <span class="cl-mvar cl-mvar-tn" data-metric="TN" data-tooltip="True Negatives">TN <span class="count">—</span></span>
+            </span>
+            <span class="cl-den">
+              <span class="cl-mvar cl-mvar-total" data-metric="TOTAL" data-tooltip="Total samples">Total <span class="count">—</span></span>
+            </span>
+          </span>
+        </div>
+        <div class="cl-formula-val">= <span id="cl-acc-val">—</span></div>
+        <div class="cl-formula-desc">Share of all predictions that are correct.</div>
+      </div>
+
+      <div class="cl-formula-card">
+        <div class="cl-formula-title">Precision</div>
+        <div class="cl-formula-expr">
+          <span class="cl-frac">
+            <span class="cl-num">
+              <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
+            </span>
+            <span class="cl-den">
+              <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
+              +
+              <span class="cl-mvar cl-mvar-fp" data-metric="FP" data-tooltip="False Positives">FP <span class="count">—</span></span>
+            </span>
+          </span>
+        </div>
+        <div class="cl-formula-val">= <span id="cl-prec-val">—</span></div>
+        <div class="cl-formula-desc">Of all predicted squares, how many actually are?</div>
+      </div>
+
+      <div class="cl-formula-card">
+        <div class="cl-formula-title">Recall</div>
+        <div class="cl-formula-expr">
+          <span class="cl-frac">
+            <span class="cl-num">
+              <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
+            </span>
+            <span class="cl-den">
+              <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
+              +
+              <span class="cl-mvar cl-mvar-fn" data-metric="FN" data-tooltip="False Negatives">FN <span class="count">—</span></span>
+            </span>
+          </span>
+        </div>
+        <div class="cl-formula-val">= <span id="cl-rec-val">—</span></div>
+        <div class="cl-formula-desc">Of all actual squares, how many did we catch?</div>
+      </div>
+
+    </div>
+  </div><!-- end cl-formulas -->
+
+  <!-- Row 4: Quantity flowchart (SVG) -->
+  <div class="cl-flow-wrap">
+    <div class="cl-section-title">All Quantities</div>
+    <svg id="cl-flow-svg" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#888"/>
+        </marker>
+        <marker id="arr-miss" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#d62728"/>
+        </marker>
+      </defs>
+
+      <!-- Total left -->
+      <rect x="10" y="80" width="70" height="36" rx="5" class="cl-flow-node cl-flow-total"/>
+      <text x="45" y="95" class="cl-flow-label">Total</text>
+      <text x="45" y="110" class="cl-flow-count" id="fl-total">—</text>
+
+      <!-- P -->
+      <rect x="120" y="44" width="70" height="36" rx="5" class="cl-flow-node cl-flow-pos"/>
+      <text x="155" y="59" class="cl-flow-label">P</text>
+      <text x="155" y="74" class="cl-flow-count" id="fl-p">—</text>
+
+      <!-- N -->
+      <rect x="120" y="116" width="70" height="36" rx="5" class="cl-flow-node cl-flow-neg"/>
+      <text x="155" y="131" class="cl-flow-label">N</text>
+      <text x="155" y="146" class="cl-flow-count" id="fl-n">—</text>
+
+      <!-- TP -->
+      <rect x="300" y="20" width="70" height="36" rx="5" class="cl-flow-node cl-flow-pos"/>
+      <text x="335" y="35" class="cl-flow-label">TP</text>
+      <text x="335" y="50" class="cl-flow-count" id="fl-tp">—</text>
+
+      <!-- FN -->
+      <rect x="300" y="68" width="70" height="36" rx="5" class="cl-flow-node cl-flow-miss-pos"/>
+      <text x="335" y="83" class="cl-flow-label">FN</text>
+      <text x="335" y="98" class="cl-flow-count" id="fl-fn">—</text>
+
+      <!-- FP -->
+      <rect x="300" y="116" width="70" height="36" rx="5" class="cl-flow-node cl-flow-miss-neg"/>
+      <text x="335" y="131" class="cl-flow-label">FP</text>
+      <text x="335" y="146" class="cl-flow-count" id="fl-fp">—</text>
+
+      <!-- TN -->
+      <rect x="300" y="144" width="70" height="36" rx="5" class="cl-flow-node cl-flow-neg"/>
+      <text x="335" y="159" class="cl-flow-label">TN</text>
+      <text x="335" y="174" class="cl-flow-count" id="fl-tn">—</text>
+
+      <!-- P' -->
+      <rect x="480" y="44" width="70" height="36" rx="5" class="cl-flow-node cl-flow-total"/>
+      <text x="515" y="59" class="cl-flow-label">P'</text>
+      <text x="515" y="74" class="cl-flow-count" id="fl-pp">—</text>
+
+      <!-- N' -->
+      <rect x="480" y="116" width="70" height="36" rx="5" class="cl-flow-node cl-flow-total"/>
+      <text x="515" y="131" class="cl-flow-label">N'</text>
+      <text x="515" y="146" class="cl-flow-count" id="fl-np">—</text>
+
+      <!-- Total right -->
+      <rect x="610" y="80" width="70" height="36" rx="5" class="cl-flow-node cl-flow-total"/>
+      <text x="645" y="95" class="cl-flow-label">Total</text>
+      <text x="645" y="110" class="cl-flow-count" id="fl-total2">—</text>
+
+      <!-- Arrows: Total → P, N -->
+      <line x1="80" y1="98" x2="118" y2="72" class="cl-flow-arrow" marker-end="url(#arr)"/>
+      <line x1="80" y1="98" x2="118" y2="126" class="cl-flow-arrow" marker-end="url(#arr)"/>
+
+      <!-- Arrows: P → TP (correct), P → FN (miss) -->
+      <line x1="190" y1="62" x2="298" y2="38" class="cl-flow-arrow" marker-end="url(#arr)"/>
+      <line x1="190" y1="62" x2="298" y2="86" class="cl-flow-arrow cl-flow-arrow-miss" marker-end="url(#arr-miss)"/>
+
+      <!-- Arrows: N → FP (miss), N → TN (correct) -->
+      <line x1="190" y1="134" x2="298" y2="134" class="cl-flow-arrow cl-flow-arrow-miss" marker-end="url(#arr-miss)"/>
+      <line x1="190" y1="134" x2="298" y2="162" class="cl-flow-arrow" marker-end="url(#arr)"/>
+
+      <!-- Arrows: TP → P', FP → P' -->
+      <line x1="370" y1="38" x2="478" y2="60" class="cl-flow-arrow" marker-end="url(#arr)"/>
+      <line x1="370" y1="134" x2="478" y2="72" class="cl-flow-arrow cl-flow-arrow-miss" marker-end="url(#arr-miss)"/>
+
+      <!-- Arrows: FN → N', TN → N' -->
+      <line x1="370" y1="86" x2="478" y2="122" class="cl-flow-arrow cl-flow-arrow-miss" marker-end="url(#arr-miss)"/>
+      <line x1="370" y1="162" x2="478" y2="138" class="cl-flow-arrow" marker-end="url(#arr)"/>
+
+      <!-- Arrows: P' → Total right, N' → Total right -->
+      <line x1="550" y1="62" x2="608" y2="90" class="cl-flow-arrow" marker-end="url(#arr)"/>
+      <line x1="550" y1="134" x2="608" y2="108" class="cl-flow-arrow" marker-end="url(#arr)"/>
+    </svg>
+
+    <!-- Quantity legend -->
+    <div class="cl-flow-legend">
+      <span><strong>P</strong> = ground-truth positives (■)</span>
+      <span><strong>N</strong> = ground-truth negatives (○)</span>
+      <span><strong>TP</strong> = true positives</span>
+      <span><strong>FP</strong> = false positives (○ called ■)</span>
+      <span><strong>FN</strong> = false negatives (■ called ○)</span>
+      <span><strong>TN</strong> = true negatives</span>
+      <span><strong>P'</strong> = predicted positives</span>
+      <span><strong>N'</strong> = predicted negatives</span>
+    </div>
+  </div><!-- end cl-flow-wrap -->
+
+</section>

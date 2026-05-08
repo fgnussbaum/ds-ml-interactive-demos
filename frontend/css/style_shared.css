@@ -1,0 +1,96 @@
+
+h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.4rem; }
+
+/* ── Panel: white card widget ────────────────────────────────────────────── */
+
+.panel {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+/* flex row: panel title + inline controls side by side */
+.panel-head {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.panel-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 0.4rem;
+}
+
+/* prevent the title from wrapping when it sits inline with controls */
+.panel-head .panel-title { white-space: nowrap; margin-bottom: 0; }
+
+/* ── Layout helpers ──────────────────────────────────────────────────────── */
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 0.75rem;
+}
+
+/* Constrain a plot to roughly half the content width instead of full-width */
+.plot-constrained { max-width: 520px; }
+
+/* ── Callouts: Use for full-width info/alert text ────────────────────────── */
+
+.callout-label {
+  background: #f0f7ff;
+  border-left: 3px solid #4a9eff;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.callout-warning {
+  background: #fffbe6;
+  border-left: 3px solid #f0c040;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+/* ── Canvas ──────────────────────────────────────────────────────────────── */
+
+canvas {
+  display: block;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: crosshair;
+  max-width: 100%;
+}
+
+/* ── Controls ────────────────────────────────────────────────────────────── */
+
+button {
+  padding: 0.3rem 0.9rem;
+  font-size: 0.85rem;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+button:hover { background: #f0f0f0; }
+
+button.active { background: #4a9eff; color: #fff; border-color: #3a8eef; }
+button.active:hover { background: #3a8eef; }
+

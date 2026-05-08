@@ -1,0 +1,282 @@
+.cl-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cl-controls label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.cl-controls select {
+  padding: 0.2rem 0.4rem;
+  font-size: 0.9rem;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+
+.cl-section-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 0.4rem;
+}
+
+/* Dot-plot canvas */
+.cl-dotplot-wrap {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  cursor: ew-resize;
+}
+
+.cl-dotplot-wrap canvas {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  cursor: ew-resize;
+}
+
+/* Row 2: matrix + chart */
+.cl-row2 {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: start;
+}
+
+/* Confusion matrix */
+.cl-matrix-wrap {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.75rem;
+}
+
+.cl-matrix {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.cl-th-pred, .cl-th-actual {
+  font-size: 0.78rem;
+  color: #666;
+  font-weight: 500;
+  padding: 0.25rem 0.4rem;
+}
+
+.cl-th-pred { text-align: center; }
+.cl-th-actual { text-align: right; white-space: nowrap; }
+
+.cl-cell {
+  text-align: center;
+  padding: 0.5rem 0.4rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  cursor: default;
+  min-width: 72px;
+}
+
+.cl-cell-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  opacity: 0.85;
+}
+
+.cl-cell-count {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.cl-cell-icon {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.75);
+  margin-top: 1px;
+}
+
+.cl-icon-miss { color: #ffa0a0; }
+
+.cl-cell-tp { background: #ff7f0e; }
+.cl-cell-tn { background: #1f77b4; }
+.cl-cell-fp { background: #7aaedc; }
+.cl-cell-fn { background: #ffb86b; }
+
+/* Metrics chart */
+.cl-metrics-wrap {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.75rem;
+}
+
+/* Formulas row */
+.cl-formulas {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.cl-formula-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 0.4rem;
+}
+
+.cl-formula-card {
+  background: #fafafa;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+}
+
+.cl-formula-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.35rem;
+}
+
+.cl-formula-expr {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.3rem;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  font-size: 0.82rem;
+}
+
+/* Fraction layout */
+.cl-frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  gap: 1px;
+}
+
+.cl-num, .cl-den {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 1px 4px;
+}
+
+.cl-num { border-bottom: 1.5px solid #555; }
+
+/* Metric variable chips */
+.cl-mvar {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: default;
+  white-space: nowrap;
+}
+
+.cl-mvar .count {
+  font-weight: 400;
+  font-size: 0.74rem;
+  opacity: 0.85;
+}
+
+.cl-mvar-tp    { background: #ff7f0e; color: #fff; }
+.cl-mvar-tn    { background: #1f77b4; color: #fff; }
+.cl-mvar-fp    { background: #7aaedc; color: #fff; }
+.cl-mvar-fn    { background: #ffb86b; color: #fff; }
+.cl-mvar-total { background: #555;    color: #fff; }
+.cl-mvar-p     { background: #ff7f0e; color: #fff; }
+.cl-mvar-n     { background: #1f77b4; color: #fff; }
+
+.cl-formula-val {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.2rem;
+}
+
+.cl-formula-desc {
+  font-size: 0.76rem;
+  color: #777;
+  line-height: 1.4;
+}
+
+/* Flowchart */
+.cl-flow-wrap {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+#cl-flow-svg {
+  width: 100%;
+  max-width: 700px;
+  display: block;
+  margin: 0.25rem 0 0.5rem;
+}
+
+/* SVG node styles via CSS classes */
+.cl-flow-node  { stroke: #fff; stroke-width: 1.5; }
+.cl-flow-total { fill: #555; }
+.cl-flow-pos   { fill: #ff7f0e; }
+.cl-flow-neg   { fill: #1f77b4; }
+.cl-flow-miss-pos { fill: #ffb86b; }
+.cl-flow-miss-neg { fill: #7aaedc; }
+
+.cl-flow-label {
+  font: bold 11px system-ui, sans-serif;
+  fill: #fff;
+  text-anchor: middle;
+  dominant-baseline: auto;
+}
+
+.cl-flow-count {
+  font: 11px system-ui, sans-serif;
+  fill: rgba(255,255,255,0.85);
+  text-anchor: middle;
+  dominant-baseline: auto;
+}
+
+.cl-flow-arrow {
+  stroke: #888;
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.cl-flow-arrow-miss {
+  stroke: #d62728;
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.cl-flow-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  font-size: 0.78rem;
+  color: #666;
+}
