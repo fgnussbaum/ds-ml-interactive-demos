@@ -80,7 +80,7 @@
 
 .cl-cell {
   text-align: center;
-  padding: 0.5rem 0.4rem;
+  padding: 8px 8px;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
   cursor: default;
@@ -89,29 +89,26 @@
 
 .cl-cell-label {
   display: block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: #fff;
-  opacity: 0.85;
-}
-
-.cl-cell-count {
-  display: block;
   font-size: 1.3rem;
   font-weight: 700;
   color: #fff;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
-.cl-cell-icon {
-  display: block;
+.cl-cell-icon-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.75);
-  margin-top: 1px;
+  color: rgba(255,255,255,0.9);
 }
 
-.cl-icon-miss { color: #ffa0a0; }
+.cl-cell-count {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+}
 
 .cl-cell-tp { background: #ff7f0e; }
 .cl-cell-tn { background: #1f77b4; }
@@ -156,13 +153,27 @@
   margin-bottom: 0.35rem;
 }
 
+.cl-formula-line {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
 .cl-formula-expr {
   display: flex;
   align-items: center;
-  margin-bottom: 0.3rem;
   flex-wrap: wrap;
   gap: 0.2rem;
   font-size: 0.82rem;
+}
+
+.cl-formula-sep {
+  font-size: 0.85rem;
+  color: #888;
+  align-self: center;
 }
 
 /* Fraction layout */
@@ -178,7 +189,7 @@
   display: flex;
   align-items: center;
   gap: 0.2rem;
-  padding: 1px 4px;
+  padding: 4px 4px;
 }
 
 .cl-num { border-bottom: 1.5px solid #555; }
@@ -188,9 +199,9 @@
   display: inline-flex;
   align-items: baseline;
   gap: 3px;
-  padding: 1px 5px;
-  border-radius: 4px;
-  font-size: 0.78rem;
+  padding: 3px 7px;
+  border-radius: 5px;
+  font-size: 0.83rem;
   font-weight: 700;
   cursor: default;
   white-space: nowrap;
@@ -198,7 +209,7 @@
 
 .cl-mvar .count {
   font-weight: 400;
-  font-size: 0.74rem;
+  font-size: 0.78rem;
   opacity: 0.85;
 }
 
@@ -209,18 +220,21 @@
 .cl-mvar-total { background: #555;    color: #fff; }
 .cl-mvar-p     { background: #ff7f0e; color: #fff; }
 .cl-mvar-n     { background: #1f77b4; color: #fff; }
+.cl-mvar-pp    { background: #ffb86b; color: #fff; }  /* P' predicted positives — light orange */
+.cl-mvar-np    { background: #7aaedc; color: #fff; }  /* N' predicted negatives — light blue */
 
 .cl-formula-val {
   font-size: 0.88rem;
   font-weight: 600;
   color: #333;
-  margin-bottom: 0.2rem;
+  white-space: nowrap;
 }
 
 .cl-formula-desc {
   font-size: 0.76rem;
   color: #777;
   line-height: 1.4;
+  margin-bottom: 0.1rem;
 }
 
 /* Flowchart */
@@ -246,6 +260,8 @@
 .cl-flow-neg   { fill: #1f77b4; }
 .cl-flow-miss-pos { fill: #ffb86b; }
 .cl-flow-miss-neg { fill: #7aaedc; }
+.cl-flow-pp       { fill: #ffb86b; }  /* P' predicted positives — light orange */
+.cl-flow-np       { fill: #7aaedc; }  /* N' predicted negatives — light blue */
 
 .cl-flow-label {
   font: bold 11px system-ui, sans-serif;

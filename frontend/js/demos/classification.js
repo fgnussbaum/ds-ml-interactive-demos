@@ -118,10 +118,10 @@
     ctx.font = '11px system-ui';
     ctx.fillStyle = C_NEG;
     ctx.textAlign = 'left';
-    if (tx > PAD_L + 50) ctx.fillText('← predict ○', PAD_L + 4, 14);
+    if (tx > PAD_L + 50) ctx.fillText('← predict ○', PAD_L + 4, 27);
     ctx.fillStyle = C_POS;
     ctx.textAlign = 'right';
-    if (tx < W - PAD_R - 50) ctx.fillText('predict ■ →', W - PAD_R - 4, 14);
+    if (tx < W - PAD_R - 50) ctx.fillText('predict ■ →', W - PAD_R - 4, 27);
 
     // Dots
     const maxStack = Math.max(...state.bins.map(b => b.stackPos), 0);
@@ -180,12 +180,17 @@
     ctx.closePath();
     ctx.fill();
 
-    // Threshold label
-    ctx.fillStyle   = '#333';
-    ctx.font        = 'bold 12px system-ui';
-    ctx.textAlign   = 'center';
-    const labelX = Math.max(PAD_L + 24, Math.min(tx, W - PAD_R - 24));
-    ctx.fillText(`t = ${state.threshold.toFixed(2)}`, labelX, H - 22);
+    // Threshold label — top, right of line when space allows, else left
+    ctx.fillStyle = '#333';
+    ctx.font      = 'bold 12px system-ui';
+    const TEXT_W  = 60;  // approx pixel width of "t = 0.00"
+    if (tx + 6 + TEXT_W <= W - PAD_R) {
+      ctx.textAlign = 'left';
+      ctx.fillText(`t = ${state.threshold.toFixed(2)}`, tx + 6, 13);
+    } else {
+      ctx.textAlign = 'right';
+      ctx.fillText(`t = ${state.threshold.toFixed(2)}`, Math.max(PAD_L + TEXT_W, tx - 6), 13);
+    }
   }
 
   function drawCross(x, y, r) {
@@ -203,7 +208,7 @@
     const t = state.threshold;
 
     const traces = [
-      { x: thresholds, y: accuracy,  name: 'Accuracy',  line: { color: '#2ca02c', width: 2 } },
+      { x: thresholds, y: accuracy,  name: 'Accuracy',  line: { color: '#111',    width: 2 } },
       { x: thresholds, y: precision, name: 'Precision', line: { color: C_POS,     width: 2 } },
       { x: thresholds, y: recall,    name: 'Recall',    line: { color: C_NEG,     width: 2 } },
     ];
@@ -350,7 +355,7 @@
       const { thresholds, accuracy, precision, recall } = state.curves;
       Plotly.react('cl-metrics-chart',
         [
-          { x: thresholds, y: accuracy,  name: 'Accuracy',  line: { color: '#2ca02c', width: 2 } },
+          { x: thresholds, y: accuracy,  name: 'Accuracy',  line: { color: '#111',    width: 2 } },
           { x: thresholds, y: precision, name: 'Precision', line: { color: C_POS,     width: 2 } },
           { x: thresholds, y: recall,    name: 'Recall',    line: { color: C_NEG,     width: 2 } },
         ],
