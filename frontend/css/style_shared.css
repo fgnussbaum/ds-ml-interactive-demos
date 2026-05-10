@@ -43,6 +43,14 @@ h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.4rem; }
 /* Constrain a plot to roughly half the content width instead of full-width */
 .plot-constrained { max-width: 520px; }
 
+/* Three-column comparison row — for spectra demos (underfit · best · overfit, etc.) */
+.panel-row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.9rem;
+  margin: 0.8rem 0;
+}
+
 /* ── Callouts: Use for full-width info/alert text ────────────────────────── */
 
 .callout-label {

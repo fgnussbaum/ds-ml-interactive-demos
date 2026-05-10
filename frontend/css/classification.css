@@ -20,19 +20,9 @@
   border-radius: 4px;
 }
 
-.cl-section-title {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: #444;
-  margin-bottom: 0.4rem;
-}
-
-/* Dot-plot canvas */
+/* Dot-plot canvas — base card style from .panel; these are the overrides */
 .cl-dotplot-wrap {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  margin-bottom: 1rem;
+  padding: 0;
   overflow: hidden;
   cursor: ew-resize;
 }
@@ -55,12 +45,6 @@
 }
 
 /* Confusion matrix */
-.cl-matrix-wrap {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 0.75rem;
-}
 
 .cl-matrix {
   border-collapse: collapse;
@@ -116,21 +100,8 @@
 .cl-cell-fn { background: #ffb86b; }
 
 /* Metrics chart */
-.cl-metrics-wrap {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 0.75rem;
-}
 
 /* Formulas row */
-.cl-formulas {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-}
 
 .cl-formula-row {
   display: grid;
@@ -238,13 +209,6 @@
 }
 
 /* Flowchart */
-.cl-flow-wrap {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-}
 
 #cl-flow-svg {
   width: 100%;

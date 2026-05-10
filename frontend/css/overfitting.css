@@ -28,26 +28,17 @@
   min-height: 1.2em;
 }
 
-.of-panel-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.9rem;
-  margin: 0.8rem 0;
-}
-
+/* Overrides for compact mini-panels in the comparison row (base: .panel) */
 .of-panel {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
   padding: 0.5rem 0.5rem 0.25rem;
+  margin-bottom: 0;
   position: relative;
   overflow: hidden;
 }
 
+/* Overrides for titles inside compact mini-panels (base: .panel-title) */
 .of-panel-title {
   font-size: 0.8rem;
-  font-weight: 600;
-  color: #444;
   text-align: center;
   margin-bottom: 0.2rem;
 }
@@ -75,13 +66,3 @@
   border-radius: 6px;
 }
 
-.of-rmse-section {
-  margin-top: 0.5rem;
-}
-
-.of-rmse-section-title {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #555;
-  margin-bottom: 0.2rem;
-}

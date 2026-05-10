@@ -31,7 +31,7 @@
   </div>
 
   <!-- Row 2: Main chart + current-degree RMSE -->
-  <div id="of-main-chart" class="plot-constrained"></div>
+  <div id="of-main-chart" class="panel plot-constrained"></div>
   <div id="of-main-rmse" class="of-main-rmse"></div>
 
   <!-- Row 3: Nudge -->
@@ -42,14 +42,14 @@
   </aside>
 
   <!-- Row 4: Comparison panels -->
-  <div class="of-panel-row">
-    <div class="of-panel">
-      <div class="of-panel-title">Underfitting &mdash; degree 1</div>
+  <div class="panel-row-3">
+    <div class="panel of-panel">
+      <div class="panel-title of-panel-title">Underfitting &mdash; degree 1</div>
       <div id="of-panel-underfit"></div>
       <div id="of-panel-underfit-rmse" class="of-panel-rmse"></div>
     </div>
-    <div class="of-panel" id="of-panel-best-wrapper">
-      <div class="of-panel-title" id="of-panel-best-title">Best fit</div>
+    <div class="panel of-panel" id="of-panel-best-wrapper">
+      <div class="panel-title of-panel-title" id="of-panel-best-title">Best fit</div>
       <div id="of-panel-best"></div>
       <div id="of-panel-best-rmse" class="of-panel-rmse"></div>
       <div id="of-panel-best-placeholder" class="of-placeholder">
@@ -57,16 +57,16 @@
         Toggle test data to find out.
       </div>
     </div>
-    <div class="of-panel">
-      <div class="of-panel-title">Overfitting &mdash; degree 20</div>
+    <div class="panel of-panel">
+      <div class="panel-title of-panel-title">Overfitting &mdash; degree 20</div>
       <div id="of-panel-overfit"></div>
       <div id="of-panel-overfit-rmse" class="of-panel-rmse"></div>
     </div>
   </div>
 
   <!-- Row 5: RMSE-by-degree chart -->
-  <div class="of-rmse-section">
-    <div class="of-rmse-section-title">RMSE by polynomial degree</div>
+  <div class="panel plot-constrained">
+    <div class="panel-title">RMSE by polynomial degree</div>
     <div id="of-rmse-chart"></div>
   </div>
 </section>

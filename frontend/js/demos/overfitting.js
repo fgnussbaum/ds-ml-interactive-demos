@@ -141,7 +141,7 @@
       legend: { orientation: 'h', y: -0.14, x: 0 },
       xaxis: { title: 'x', zeroline: false },
       yaxis: { title: 'y', zeroline: false, range: yRange() },
-      paper_bgcolor: '#fff',
+      paper_bgcolor: 'transparent',
       plot_bgcolor: '#fff',
     };
   }

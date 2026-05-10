@@ -17,7 +17,7 @@
   </div>
 
   <!-- Row 1: Dot plot canvas -->
-  <div class="cl-dotplot-wrap">
+  <div class="panel cl-dotplot-wrap">
     <canvas id="cl-canvas"></canvas>
   </div>
 
@@ -25,8 +25,8 @@
   <div class="cl-row2">
 
     <!-- Confusion matrix -->
-    <div class="cl-matrix-wrap">
-      <div class="cl-section-title">Confusion Matrix</div>
+    <div class="panel">
+      <div class="panel-title">Confusion Matrix</div>
       <table class="cl-matrix">
         <thead>
           <tr>
@@ -87,16 +87,16 @@
     </div>
 
     <!-- Metrics chart -->
-    <div class="cl-metrics-wrap">
-      <div class="cl-section-title">Metrics vs. Threshold</div>
+    <div class="panel">
+      <div class="panel-title">Metrics vs. Threshold</div>
       <div id="cl-metrics-chart"></div>
     </div>
 
   </div><!-- end cl-row2 -->
 
   <!-- Row 3: Formulas -->
-  <div class="cl-formulas">
-    <div class="cl-section-title">Metrics</div>
+  <div class="panel">
+    <div class="panel-title">Metrics</div>
     <div class="cl-formula-row">
 
       <div class="cl-formula-card">
@@ -185,8 +185,8 @@
   </div><!-- end cl-formulas -->
 
   <!-- Row 4: Quantity flowchart (SVG) -->
-  <div class="cl-flow-wrap">
-    <div class="cl-section-title">All Quantities</div>
+  <div class="panel">
+    <div class="panel-title">All Quantities</div>
     <svg id="cl-flow-svg" viewBox="0 0 700 212" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
