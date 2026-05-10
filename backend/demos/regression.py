@@ -3,6 +3,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 
 from backend.solvers.least_squares import solve as ls_solve
+from backend.solvers.ridge_regression import solve as ridge_solve
 from backend.solvers.robust_regression import solve as rr_solve
 
 router = APIRouter()
@@ -12,6 +13,7 @@ class FitRequest(BaseModel):
     points: list[list[float]]
     show_ls: bool = True
     show_rr: bool = False
+    show_ridge: bool = False
 
 
 class LineResult(BaseModel):
@@ -23,6 +25,7 @@ class LineResult(BaseModel):
 class FitResponse(BaseModel):
     ls: LineResult | None = None
     rr: LineResult | None = None
+    ridge: LineResult | None = None
 
 
 @router.post("/fit", response_model=FitResponse)
@@ -45,6 +48,14 @@ def fit(req: FitRequest) -> FitResponse:
     if req.show_rr:
         slope, intercept = rr_solve(xs, ys)
         response.rr = LineResult(
+            slope=slope,
+            intercept=intercept,
+            residuals=(ys - (slope * xs + intercept)).tolist(),
+        )
+
+    if req.show_ridge:
+        slope, intercept = ridge_solve(xs, ys)
+        response.ridge = LineResult(
             slope=slope,
             intercept=intercept,
             residuals=(ys - (slope * xs + intercept)).tolist(),
