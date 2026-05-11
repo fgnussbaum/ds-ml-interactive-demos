@@ -11,7 +11,7 @@ function _loadScript(src) {
 (async () => {
   // 1. Inject partials in order so demo scripts find their DOM elements
   const content = document.getElementById('content');
-  const partials = ['regression', 'overfitting', 'classification', 'decision_tree', 'gradient_descent'];
+  const partials = ['regression', 'overfitting', 'classification', 'decision_tree', 'gradient_descent', 'regularized_regression'];
   for (const name of partials) {
     const html = await fetch(`/partials/${name}.html`).then(r => r.text());
     content.insertAdjacentHTML('beforeend', html);
@@ -24,6 +24,7 @@ function _loadScript(src) {
     '/js/demos/classification.js',
     '/js/demos/decision_tree.js',
     '/js/demos/gradient_descent.js',
+    '/js/demos/regularized_regression.js',
   ]) {
     await _loadScript(src);
   }
@@ -41,7 +42,8 @@ function _loadScript(src) {
       if (demo === 'overfitting')        window._overfittingBootstrap?.();
       if (demo === 'classification')     window._classificationBootstrap?.();
       if (demo === 'decision_tree')      window._decisionTreeBootstrap?.();
-      if (demo === 'gradient_descent')   window._gradientDescentBootstrap?.();
+      if (demo === 'gradient_descent')         window._gradientDescentBootstrap?.();
+      if (demo === 'regularized_regression')   window._regularizedRegressionBootstrap?.();
     });
   });
 })().catch(err => console.error('[main] failed to initialise:', err));

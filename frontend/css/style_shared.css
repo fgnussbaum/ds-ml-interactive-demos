@@ -3,7 +3,7 @@ h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.4rem; }
 
 /* ── Panel: white card widget ────────────────────────────────────────────── */
 
-.panel {
+.panel { /* every panel should use this style for homogenization, adding additional styles as needed */
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -101,4 +101,8 @@ button:hover { background: #f0f0f0; }
 
 button.active { background: #4a9eff; color: #fff; border-color: #3a8eef; }
 button.active:hover { background: #3a8eef; }
+
+/* ── Visibility utility ──────────────────────────────────────────────────── */
+
+.hidden { display: none !important; }
 
