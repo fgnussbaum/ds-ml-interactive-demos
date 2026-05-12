@@ -1,0 +1,125 @@
+<section id="demo-regularized_regression" class="demo-section">
+  <h2>Regularization: Ridge &amp; Lasso</h2>
+  <aside class="callout-label">
+    Regularization penalizes large coefficients to prevent overfitting — but
+    too much shrinks the model into uselessness. Ridge (L2) and Lasso (L1)
+    shrink differently: Ridge nudges all coefficients toward zero; Lasso
+    drives some to exactly zero, selecting features.<br>
+    Diabetes dataset &nbsp;·&nbsp; 442 patients, 10 physiological features,
+    target = disease progression score &nbsp;·&nbsp;
+    Split: 20% train · 40% val · 40% test
+  </aside>
+
+  <!-- Panel 1 · The Data ───────────────────────────────────────────────── -->
+  <div class="panel">
+    <span class="panel-title">1 · The Data</span>
+    <div id="rr-pearson-chart"></div>
+    <aside class="callout-label">
+      These correlations measure each feature's relationship with the target
+      in isolation. The model will learn to combine them, controlling for all
+      other features.
+    </aside>
+  </div>
+
+  <!-- Panel 2 · Add Regularization ────────────────────────────────────── -->
+  <div class="panel">
+    <span class="panel-title">2 · Add Regularization</span>
+
+    <div class="rr-slider-row">
+      <label class="rr-slider-label">
+        <span>α = <strong id="rr-alpha-val">0.00</strong></span>
+        <input type="range" id="rr-alpha" min="0" max="10" step="1" value="0">
+        <span class="rr-slider-hint">0 → no regularization &nbsp;·&nbsp; 0.10 → heavy shrinkage</span>
+      </label>
+    </div>
+
+    <div class="two-col">
+      <!-- Ridge column -->
+      <div>
+        <h4 class="rr-model-title">Ridge (L2)</h4>
+        <div id="rr-ridge-error"></div>
+        <div class="rr-rmse" id="rr-ridge-rmse"></div>
+      </div>
+      <!-- Lasso column -->
+      <div>
+        <h4 class="rr-model-title">Lasso (L1)</h4>
+        <div id="rr-lasso-error"></div>
+        <div class="rr-rmse" id="rr-lasso-rmse"></div>
+      </div>
+    </div>
+
+    <aside class="callout-label hidden" id="rr-grid-hint">
+      Finding sweet spots manually is hard. Do a grid search to 
+      reveal them!
+    </aside>
+    <button id="rr-systematic-btn">Do it systematically with Grid Search ↓</button>
+  </div>
+
+  <!-- Panel 3 · Grid Search (hidden until "Do it systematically") ──────── -->
+  <div class="panel hidden" id="rr-panel-grid">
+    <div class="panel-head">
+      <span class="panel-title">3 · Grid Search</span>
+      <div class="rr-toggle-group">
+        <button id="rr-coarse-btn" class="active">Coarse (11 steps)</button>
+        <button id="rr-fine-btn">Fine (101 steps)</button>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="rr-model-title">Ridge coefficient paths</div>
+        <div id="rr-ridge-coef-path"></div>
+      </div>
+      <div>
+        <div class="rr-model-title">Lasso coefficient paths</div>
+        <div id="rr-lasso-coef-path"></div>
+      </div>
+    </div>
+
+    <button id="rr-test-btn">Evaluate on test set ↓</button>
+  </div>
+
+  <!-- Panel 4 · Test Evaluation (hidden until "Evaluate on test set") ──── -->
+  <div class="panel hidden" id="rr-panel-test">
+    <span class="panel-title">4 · Test Evaluation</span>
+    <div class="two-col">
+      <div class="rr-test-block">
+        <div class="rr-model-title">Ridge (L2)</div>
+        <div id="rr-ridge-test-stat"></div>
+      </div>
+      <div class="rr-test-block">
+        <div class="rr-model-title">Lasso (L1)</div>
+        <div id="rr-lasso-test-stat"></div>
+      </div>
+    </div>
+    <aside class="callout-label">
+      We never used these points to choose α — that's what makes this
+      estimate trustworthy.
+    </aside>
+    <button class="hidden" id="rr-bonus-btn">Bonus: compare correlation and regression coefficients ↓</button>
+  </div>
+
+  <!-- Panel 5 · Bonus comparison (hidden until bonus button clicked) ────── -->
+  <div class="panel hidden" id="rr-panel-bonus">
+    <span class="panel-title">Bonus · Correlation vs. Regression Coefficients</span>
+    <aside class="callout-label">
+      Pearson r measures each feature's raw correlation with the target.
+      Regression coefficients control for all other features simultaneously —
+      the two can disagree, especially when features are correlated with each other.
+    </aside>
+    <div class="panel-row-3">
+      <div>
+        <div class="rr-model-title">Ridge (L2) — best α</div>
+        <div id="rr-bonus-ridge"></div>
+      </div>
+      <div>
+        <div class="rr-model-title">Pearson r</div>
+        <div id="rr-bonus-pearson"></div>
+      </div>
+      <div>
+        <div class="rr-model-title">Lasso (L1) — best α</div>
+        <div id="rr-bonus-lasso"></div>
+      </div>
+    </div>
+  </div>
+</section>

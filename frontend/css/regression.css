@@ -15,5 +15,11 @@
   user-select: none;
 }
 
-.ls-label { color: #00662c; font-weight: 500; }
-.rr-label { color: #49080e; font-weight: 500; }
+.ls-label { color: #1f77b4; font-weight: 500; }  /* matplotlib C0 */
+.rr-label { color: #ff7f0e; font-weight: 500; }  /* matplotlib C1 */
+
+.formula-note {
+  font-size: 0.85rem;
+  color: #555;
+  margin: 0.5rem 0 0.8rem;
+}

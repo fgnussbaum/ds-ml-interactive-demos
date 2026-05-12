@@ -1,5 +1,9 @@
 <section id="demo-classification" class="demo-section">
   <h2>Classification &amp; Thresholding</h2>
+  <aside class="callout-label">
+    Simple classification demo. Use a slider to classify by a simple threshold.
+    See how key classification metrics change.
+  </aside>
 
   <!-- Controls row -->
   <div class="cl-controls">
@@ -13,7 +17,7 @@
   </div>
 
   <!-- Row 1: Dot plot canvas -->
-  <div class="cl-dotplot-wrap">
+  <div class="panel cl-dotplot-wrap">
     <canvas id="cl-canvas"></canvas>
   </div>
 
@@ -21,41 +25,61 @@
   <div class="cl-row2">
 
     <!-- Confusion matrix -->
-    <div class="cl-matrix-wrap">
-      <div class="cl-section-title">Confusion Matrix</div>
+    <div class="panel">
+      <div class="panel-title">Confusion Matrix</div>
       <table class="cl-matrix">
         <thead>
           <tr>
             <th></th>
-            <th class="cl-th-pred">Predicted ○</th>
+            <th class="cl-th-pred">Predicted ⬤</th>
             <th class="cl-th-pred">Predicted ■</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th class="cl-th-actual">Actual ○</th>
+            <th class="cl-th-actual">Actual ⬤</th>
             <td id="cl-tn" class="cl-cell cl-cell-tn" data-metric="TN" data-tooltip="True Negative: circle correctly classified as circle">
               <span class="cl-cell-label">TN</span>
-              <span class="cl-cell-count count">—</span>
-              <span class="cl-cell-icon">○</span>
+              <span class="cl-cell-icon-row">
+                <svg width="22" height="22" viewBox="-11 -11 22 22" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="0" cy="0" r="6" fill="#1f77b4" stroke="white" stroke-width="1.5"/>
+                </svg>
+                = <span class="cl-cell-count count">—</span>
+              </span>
             </td>
             <td id="cl-fp" class="cl-cell cl-cell-fp" data-metric="FP" data-tooltip="False Positive: circle wrongly classified as square">
               <span class="cl-cell-label">FP</span>
-              <span class="cl-cell-count count">—</span>
-              <span class="cl-cell-icon cl-icon-miss">○✕</span>
+              <span class="cl-cell-icon-row">
+                <svg width="22" height="22" viewBox="-11 -11 22 22" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="0" cy="0" r="6" fill="#1f77b4" stroke="white" stroke-width="1.5"/>
+                  <line x1="-5" y1="-5" x2="5" y2="5" stroke="#d62728" stroke-width="2.5"/>
+                  <line x1="5" y1="-5" x2="-5" y2="5" stroke="#d62728" stroke-width="2.5"/>
+                </svg>
+                = <span class="cl-cell-count count">—</span>
+              </span>
             </td>
           </tr>
           <tr>
             <th class="cl-th-actual">Actual ■</th>
             <td id="cl-fn" class="cl-cell cl-cell-fn" data-metric="FN" data-tooltip="False Negative: square wrongly classified as circle">
               <span class="cl-cell-label">FN</span>
-              <span class="cl-cell-count count">—</span>
-              <span class="cl-cell-icon cl-icon-miss">■✕</span>
+              <span class="cl-cell-icon-row">
+                <svg width="22" height="22" viewBox="-11 -11 22 22" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="-6" y="-6" width="12" height="12" fill="#ff7f0e" stroke="white" stroke-width="1.5"/>
+                  <line x1="-5" y1="-5" x2="5" y2="5" stroke="#d62728" stroke-width="2.5"/>
+                  <line x1="5" y1="-5" x2="-5" y2="5" stroke="#d62728" stroke-width="2.5"/>
+                </svg>
+                = <span class="cl-cell-count count">—</span>
+              </span>
             </td>
             <td id="cl-tp" class="cl-cell cl-cell-tp" data-metric="TP" data-tooltip="True Positive: square correctly classified as square">
               <span class="cl-cell-label">TP</span>
-              <span class="cl-cell-count count">—</span>
-              <span class="cl-cell-icon">■</span>
+              <span class="cl-cell-icon-row">
+                <svg width="22" height="22" viewBox="-11 -11 22 22" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="-6" y="-6" width="12" height="12" fill="#ff7f0e" stroke="white" stroke-width="1.5"/>
+                </svg>
+                = <span class="cl-cell-count count">—</span>
+              </span>
             </td>
           </tr>
         </tbody>
@@ -63,79 +87,107 @@
     </div>
 
     <!-- Metrics chart -->
-    <div class="cl-metrics-wrap">
-      <div class="cl-section-title">Metrics vs. Threshold</div>
+    <div class="panel">
+      <div class="panel-title">Metrics vs. Threshold</div>
       <div id="cl-metrics-chart"></div>
     </div>
 
   </div><!-- end cl-row2 -->
 
   <!-- Row 3: Formulas -->
-  <div class="cl-formulas">
-    <div class="cl-section-title">Metrics</div>
+  <div class="panel">
+    <div class="panel-title">Metrics</div>
     <div class="cl-formula-row">
 
       <div class="cl-formula-card">
-        <div class="cl-formula-title">Accuracy</div>
-        <div class="cl-formula-expr">
-          <span class="cl-frac">
-            <span class="cl-num">
-              <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
-              +
-              <span class="cl-mvar cl-mvar-tn" data-metric="TN" data-tooltip="True Negatives">TN <span class="count">—</span></span>
-            </span>
-            <span class="cl-den">
-              <span class="cl-mvar cl-mvar-total" data-metric="TOTAL" data-tooltip="Total samples">Total <span class="count">—</span></span>
-            </span>
-          </span>
-        </div>
-        <div class="cl-formula-val">= <span id="cl-acc-val">—</span></div>
+        <div class="cl-formula-title" style="color:#111">Accuracy</div>
         <div class="cl-formula-desc">Share of all predictions that are correct.</div>
+        <div class="cl-formula-line">
+          <div class="cl-formula-expr">
+            <span class="cl-frac">
+              <span class="cl-num">
+                <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
+                +
+                <span class="cl-mvar cl-mvar-tn" data-metric="TN" data-tooltip="True Negatives">TN <span class="count">—</span></span>
+              </span>
+              <span class="cl-den">
+                <span class="cl-mvar cl-mvar-total" data-metric="TOTAL" data-tooltip="Total samples">Total <span class="count">—</span></span>
+              </span>
+            </span>
+          </div>
+          <div class="cl-formula-val">= <span id="cl-acc-val">—</span></div>
+        </div>
       </div>
 
       <div class="cl-formula-card">
-        <div class="cl-formula-title">Precision</div>
-        <div class="cl-formula-expr">
-          <span class="cl-frac">
-            <span class="cl-num">
-              <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
+        <div class="cl-formula-title" style="color:#ff7f0e">Precision</div>
+        <div class="cl-formula-desc">Of all <i>predicted</i> squares, how many are actually squares?</div>
+        <div class="cl-formula-line">
+          <div class="cl-formula-expr">
+            <span class="cl-frac">
+              <span class="cl-num">
+                <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
+              </span>
+              <span class="cl-den">
+                <span class="cl-mvar cl-mvar-pp" data-metric="PP" data-tooltip="Predicted positives P' = TP + FP">P' <span class="count">—</span></span>
+              </span>
             </span>
-            <span class="cl-den">
-              <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
-              +
-              <span class="cl-mvar cl-mvar-fp" data-metric="FP" data-tooltip="False Positives">FP <span class="count">—</span></span>
+          </div>
+          <span class="cl-formula-sep">=</span>
+          <div class="cl-formula-expr">
+            <span class="cl-frac">
+              <span class="cl-num">
+                <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
+              </span>
+              <span class="cl-den">
+                <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
+                +
+                <span class="cl-mvar cl-mvar-fp" data-metric="FP" data-tooltip="False Positives">FP <span class="count">—</span></span>
+              </span>
             </span>
-          </span>
+          </div>
+          <div class="cl-formula-val">= <span id="cl-prec-val">—</span></div>
         </div>
-        <div class="cl-formula-val">= <span id="cl-prec-val">—</span></div>
-        <div class="cl-formula-desc">Of all predicted squares, how many actually are?</div>
       </div>
 
       <div class="cl-formula-card">
-        <div class="cl-formula-title">Recall</div>
-        <div class="cl-formula-expr">
-          <span class="cl-frac">
-            <span class="cl-num">
-              <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
+        <div class="cl-formula-title" style="color:#1f77b4">Recall</div>
+        <div class="cl-formula-desc">Of all <i>actual</i> squares, how many did we catch?</div>
+        <div class="cl-formula-line">
+          <div class="cl-formula-expr">
+            <span class="cl-frac">
+              <span class="cl-num">
+                <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
+              </span>
+              <span class="cl-den">
+                <span class="cl-mvar cl-mvar-p" data-metric="P" data-tooltip="Actual positives P = TP + FN">P <span class="count">—</span></span>
+              </span>
             </span>
-            <span class="cl-den">
-              <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
-              +
-              <span class="cl-mvar cl-mvar-fn" data-metric="FN" data-tooltip="False Negatives">FN <span class="count">—</span></span>
+          </div>
+          <span class="cl-formula-sep">=</span>
+          <div class="cl-formula-expr">
+            <span class="cl-frac">
+              <span class="cl-num">
+                <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
+              </span>
+              <span class="cl-den">
+                <span class="cl-mvar cl-mvar-tp" data-metric="TP" data-tooltip="True Positives">TP <span class="count">—</span></span>
+                +
+                <span class="cl-mvar cl-mvar-fn" data-metric="FN" data-tooltip="False Negatives">FN <span class="count">—</span></span>
+              </span>
             </span>
-          </span>
+          </div>
+          <div class="cl-formula-val">= <span id="cl-rec-val">—</span></div>
         </div>
-        <div class="cl-formula-val">= <span id="cl-rec-val">—</span></div>
-        <div class="cl-formula-desc">Of all actual squares, how many did we catch?</div>
       </div>
 
     </div>
   </div><!-- end cl-formulas -->
 
   <!-- Row 4: Quantity flowchart (SVG) -->
-  <div class="cl-flow-wrap">
-    <div class="cl-section-title">All Quantities</div>
-    <svg id="cl-flow-svg" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+  <div class="panel">
+    <div class="panel-title">All Quantities</div>
+    <svg id="cl-flow-svg" viewBox="0 0 700 212" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
           <path d="M0,0 L0,6 L8,3 z" fill="#888"/>
@@ -176,17 +228,17 @@
       <text x="335" y="146" class="cl-flow-count" id="fl-fp">—</text>
 
       <!-- TN -->
-      <rect x="300" y="144" width="70" height="36" rx="5" class="cl-flow-node cl-flow-neg"/>
-      <text x="335" y="159" class="cl-flow-label">TN</text>
-      <text x="335" y="174" class="cl-flow-count" id="fl-tn">—</text>
+      <rect x="300" y="164" width="70" height="36" rx="5" class="cl-flow-node cl-flow-neg"/>
+      <text x="335" y="179" class="cl-flow-label">TN</text>
+      <text x="335" y="194" class="cl-flow-count" id="fl-tn">—</text>
 
       <!-- P' -->
-      <rect x="480" y="44" width="70" height="36" rx="5" class="cl-flow-node cl-flow-total"/>
+      <rect x="480" y="44" width="70" height="36" rx="5" class="cl-flow-node cl-flow-pp"/>
       <text x="515" y="59" class="cl-flow-label">P'</text>
       <text x="515" y="74" class="cl-flow-count" id="fl-pp">—</text>
 
       <!-- N' -->
-      <rect x="480" y="116" width="70" height="36" rx="5" class="cl-flow-node cl-flow-total"/>
+      <rect x="480" y="116" width="70" height="36" rx="5" class="cl-flow-node cl-flow-np"/>
       <text x="515" y="131" class="cl-flow-label">N'</text>
       <text x="515" y="146" class="cl-flow-count" id="fl-np">—</text>
 
@@ -205,7 +257,7 @@
 
       <!-- Arrows: N → FP (miss), N → TN (correct) -->
       <line x1="190" y1="134" x2="298" y2="134" class="cl-flow-arrow cl-flow-arrow-miss" marker-end="url(#arr-miss)"/>
-      <line x1="190" y1="134" x2="298" y2="162" class="cl-flow-arrow" marker-end="url(#arr)"/>
+      <line x1="190" y1="134" x2="298" y2="182" class="cl-flow-arrow" marker-end="url(#arr)"/>
 
       <!-- Arrows: TP → P', FP → P' -->
       <line x1="370" y1="38" x2="478" y2="60" class="cl-flow-arrow" marker-end="url(#arr)"/>
@@ -213,7 +265,7 @@
 
       <!-- Arrows: FN → N', TN → N' -->
       <line x1="370" y1="86" x2="478" y2="122" class="cl-flow-arrow cl-flow-arrow-miss" marker-end="url(#arr-miss)"/>
-      <line x1="370" y1="162" x2="478" y2="138" class="cl-flow-arrow" marker-end="url(#arr)"/>
+      <line x1="370" y1="182" x2="478" y2="138" class="cl-flow-arrow" marker-end="url(#arr)"/>
 
       <!-- Arrows: P' → Total right, N' → Total right -->
       <line x1="550" y1="62" x2="608" y2="90" class="cl-flow-arrow" marker-end="url(#arr)"/>
