@@ -16,8 +16,8 @@
     <div id="rr-pearson-chart"></div>
     <aside class="callout-label">
       These correlations measure each feature's relationship with the target
-      in isolation. The model will learn to combine them — controlling for all
-      other features — which can change the picture.
+      in isolation. The model will learn to combine them, controlling for all
+      other features.
     </aside>
   </div>
 
@@ -39,22 +39,20 @@
         <h4 class="rr-model-title">Ridge (L2)</h4>
         <div id="rr-ridge-error"></div>
         <div class="rr-rmse" id="rr-ridge-rmse"></div>
-        <div id="rr-ridge-coef-bar"></div>
       </div>
       <!-- Lasso column -->
       <div>
         <h4 class="rr-model-title">Lasso (L1)</h4>
         <div id="rr-lasso-error"></div>
         <div class="rr-rmse" id="rr-lasso-rmse"></div>
-        <div id="rr-lasso-coef-bar"></div>
       </div>
     </div>
 
     <aside class="callout-label hidden" id="rr-grid-hint">
-      Lasso's sweet spot is harder to find by hand — the grid search will
-      reveal it.
+      Finding sweet spots manually is hard. Do a grid search to 
+      reveal them!
     </aside>
-    <button id="rr-systematic-btn">Do it systematically</button>
+    <button id="rr-systematic-btn">Do it systematically with Grid Search ↓</button>
   </div>
 
   <!-- Panel 3 · Grid Search (hidden until "Do it systematically") ──────── -->
@@ -67,7 +65,7 @@
       </div>
     </div>
 
-    <div class="two-col" id="rr-coef-paths-row">
+    <div class="two-col">
       <div>
         <div class="rr-model-title">Ridge coefficient paths</div>
         <div id="rr-ridge-coef-path"></div>
@@ -78,13 +76,13 @@
       </div>
     </div>
 
-    <button id="rr-test-btn">Evaluate on test set</button>
+    <button id="rr-test-btn">Evaluate on test set ↓</button>
   </div>
 
   <!-- Panel 4 · Test Evaluation (hidden until "Evaluate on test set") ──── -->
   <div class="panel hidden" id="rr-panel-test">
     <span class="panel-title">4 · Test Evaluation</span>
-    <div class="two-col rr-test-results">
+    <div class="two-col">
       <div class="rr-test-block">
         <div class="rr-model-title">Ridge (L2)</div>
         <div id="rr-ridge-test-stat"></div>
@@ -98,5 +96,30 @@
       We never used these points to choose α — that's what makes this
       estimate trustworthy.
     </aside>
+    <button class="hidden" id="rr-bonus-btn">Bonus: compare correlation and regression coefficients ↓</button>
+  </div>
+
+  <!-- Panel 5 · Bonus comparison (hidden until bonus button clicked) ────── -->
+  <div class="panel hidden" id="rr-panel-bonus">
+    <span class="panel-title">Bonus · Correlation vs. Regression Coefficients</span>
+    <aside class="callout-label">
+      Pearson r measures each feature's raw correlation with the target.
+      Regression coefficients control for all other features simultaneously —
+      the two can disagree, especially when features are correlated with each other.
+    </aside>
+    <div class="panel-row-3">
+      <div>
+        <div class="rr-model-title">Ridge (L2) — best α</div>
+        <div id="rr-bonus-ridge"></div>
+      </div>
+      <div>
+        <div class="rr-model-title">Pearson r</div>
+        <div id="rr-bonus-pearson"></div>
+      </div>
+      <div>
+        <div class="rr-model-title">Lasso (L1) — best α</div>
+        <div id="rr-bonus-lasso"></div>
+      </div>
+    </div>
   </div>
 </section>

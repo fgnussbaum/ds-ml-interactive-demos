@@ -40,6 +40,10 @@ h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.4rem; }
   margin-bottom: 0.75rem;
 }
 
+/* min-width: 0 overrides the default `auto`, which otherwise lets grid children
+   (e.g. Plotly charts) expand past their 1fr column instead of shrinking. */
+.two-col > *, .panel-row-3 > * { min-width: 0; }
+
 /* Constrain a plot to roughly half the content width instead of full-width */
 .plot-constrained { max-width: 520px; }
 
